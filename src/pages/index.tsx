@@ -8,6 +8,7 @@ import ptBR from 'date-fns/locale/pt-BR';
 import { FiCalendar, FiUser } from 'react-icons/fi';
 import { useState } from 'react';
 import ApiSearchResponse from '@prismicio/client/types/ApiSearchResponse';
+import Link from 'next/link';
 import { getPrismicClient } from '../services/prismic';
 
 import commonStyles from '../styles/common.module.scss';
@@ -74,19 +75,19 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
 
       <main className={commonStyles.container}>
         {posts.map(post => (
-          <div className={styles.postContainer}>
-            <a key={post.uid} href="/">
+          <div className={styles.postContainer} key={post.uid}>
+            <Link href={`/posts/${post.uid}`}>
               <h1>{post.data.title}</h1>
-              <p>{post.data.subtitle}</p>
-              <div className={styles.infos}>
-                <time>
-                  <FiCalendar /> {post.first_publication_date}
-                </time>
-                <span>
-                  <FiUser /> {post.data.author}
-                </span>
-              </div>
-            </a>
+            </Link>
+            <p>{post.data.subtitle}</p>
+            <div className={styles.infos}>
+              <time>
+                <FiCalendar /> {post.first_publication_date}
+              </time>
+              <span>
+                <FiUser /> {post.data.author}
+              </span>
+            </div>
           </div>
         ))}
 
@@ -109,7 +110,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const postsResponse = await prismic.query(
     [Prismic.predicates.at('document.type', 'posts')],
-    { fetch: ['publication.title', 'publication.content'], pageSize: 1 }
+    { fetch: ['post.title', 'post.subtile', 'post.author'], pageSize: 30 }
   );
 
   // console.log(JSON.stringify(postsResponse, null, 2));
@@ -123,6 +124,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { postsPagination },
-    redirect: 60,
+    redirect: 60 * 30,
   };
 };
