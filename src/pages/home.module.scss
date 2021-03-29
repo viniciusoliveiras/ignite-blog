@@ -25,6 +25,12 @@
       margin-left: 1.5rem;
     }
   }
+
+  &:hover {
+    h1 {
+      color: var(--highlight);
+    }
+  }
 }
 
 .loadMore {
