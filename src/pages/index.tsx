@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next';
 import Prismic from '@prismicio/client';
 import Head from 'next/head';
 
+import { FiCalendar, FiUser, FiClock } from 'react-icons/fi';
 import { getPrismicClient } from '../services/prismic';
 
 import commonStyles from '../styles/common.module.scss';
@@ -34,6 +35,44 @@ export default function Home() {
       <Head>
         <title>home | blog</title>
       </Head>
+
+      <main className={commonStyles.container}>
+        <div className={styles.postContainer}>
+          <h1>Donec vel nisl id nibh lobortis congue eget cursus nisi</h1>
+          <p>
+            Aenean hendrerit sem vitae urna vulputate, in bibendum quam
+            ultricies.
+          </p>
+          <div className={styles.infos}>
+            <time>
+              <FiCalendar /> 29 Mar 2021
+            </time>
+            <span>
+              <FiUser /> Vinícius Oliveira
+            </span>
+          </div>
+        </div>
+
+        <div className={styles.postContainer}>
+          <h1>Donec vel nisl id nibh lobortis congue eget cursus nisi</h1>
+          <p>
+            Aenean hendrerit sem vitae urna vulputate, in bibendum quam
+            ultricies.
+          </p>
+          <div className={styles.infos}>
+            <time>
+              <FiCalendar /> 29 Mar 2021
+            </time>
+            <span>
+              <FiUser /> Vinícius Oliveira
+            </span>
+          </div>
+        </div>
+
+        <button type="button" className={styles.loadMore}>
+          Carregar mais posts
+        </button>
+      </main>
     </>
   );
 }

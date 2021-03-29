@@ -4,12 +4,12 @@
   padding: 0;
 }
 :root {
-  --pink: #ff57b2;
+  --highlight: #ff57b2;
 
-  --gray-100: #f8f8f8;
-  --gray-200: #d7d7d7;
-  --gray-300: #bbbbbb;
-  --gray-900: #1a1d23;
+  --heading: #f8f8f8;
+  --body: #d7d7d7;
+  --info: #bbbbbb;
+  --background: #1a1d23;
 }
 
 @media (max-width: 1080px) {
@@ -26,7 +26,7 @@
 
 body {
   background: #282c34;
-  color: var(--gray-100);
+  color: var(--heading);
 }
 
 body,

@@ -1,1 +1,47 @@
-// TODO
+.postContainer {
+  margin-top: 4rem;
+
+  h1 {
+    font-weight: bold;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    color: var(--body);
+    font-size: 1.125rem;
+  }
+
+  .infos {
+    margin-top: 1.5rem;
+    color: var(--info);
+    font-size: 0.875rem;
+    line-height: 1.6rem;
+
+    svg {
+      font-size: 1rem;
+    }
+
+    span {
+      margin-left: 1.5rem;
+    }
+  }
+}
+
+.loadMore {
+  width: 11rem;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+
+  background: none;
+
+  color: var(--highlight);
+  font-weight: 600;
+  font-size: 1.125rem;
+  border: 0;
+
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: brightness(0.8);
+  }
+}
