@@ -37,13 +37,7 @@ interface HomeProps {
 function mapPostIndex(post): Post {
   return {
     uid: post.uid,
-    first_publication_date: format(
-      new Date(post.first_publication_date),
-      'PP',
-      {
-        locale: ptBR,
-      }
-    ),
+    first_publication_date: post.first_publication_date,
     data: {
       title: post.data.title,
       subtitle: post.data.subtitle,
@@ -85,7 +79,10 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
             <p>{post.data.subtitle}</p>
             <div className={styles.infos}>
               <time>
-                <FiCalendar /> {post.first_publication_date}
+                <FiCalendar />{' '}
+                {format(new Date(post.first_publication_date), 'PP', {
+                  locale: ptBR,
+                })}
               </time>
               <span>
                 <FiUser /> {post.data.author}
@@ -113,7 +110,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const postsResponse = await prismic.query(
     [Prismic.predicates.at('document.type', 'posts')],
-    { fetch: ['post.title', 'post.subtile', 'post.author'], pageSize: 30 }
+    { fetch: ['post.title', 'post.subtile', 'post.author'], pageSize: 1 }
   );
 
   // console.log(JSON.stringify(postsResponse, null, 2));
