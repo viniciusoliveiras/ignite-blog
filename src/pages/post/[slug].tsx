@@ -5,6 +5,7 @@ import Prismic from '@prismicio/client';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { RichText } from 'prismic-dom';
+import { useRouter } from 'next/router';
 import Header from '../../components/Header';
 
 import { getPrismicClient } from '../../services/prismic';
@@ -34,6 +35,12 @@ interface PostProps {
 }
 
 export default function Post({ post }: PostProps) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Carregando...</div>;
+  }
+
   return (
     <>
       <Head>
@@ -122,7 +129,7 @@ export const getStaticProps: GetStaticProps = async context => {
   };
 
   // console.log(JSON.stringify(response.data.content.heading), null, 2);
-  console.log(response.data.content);
+  // console.log(response.data.content);
 
   return {
     props: { post },
