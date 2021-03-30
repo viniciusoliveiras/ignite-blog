@@ -1,6 +1,6 @@
 .imageBanner {
   max-width: 100vw;
-  margin: 5rem auto;
+  margin: 3rem auto;
 
   img {
     width: 100%;
@@ -21,6 +21,8 @@
     margin-top: 1.5rem;
     margin-bottom: 4rem;
     line-height: 1.25rem;
+    color: var(--info);
+    letter-spacing: 0.03rem;
 
     time,
     span.infoAuthor {
@@ -34,10 +36,30 @@
     line-height: 1.575rem;
     text-align: justify;
 
-    h1 {
+    header {
       font-size: 2.25rem;
       line-height: 3.15rem;
       font-weight: 700;
+      color: var(--heading);
+
+      margin-bottom: 3rem;
+    }
+
+    p,
+    ul {
+      margin: 1.5rem 0;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+
+      li {
+        margin: 0.5rem 0;
+      }
+    }
+
+    a {
+      color: var(--highlight);
     }
   }
 }

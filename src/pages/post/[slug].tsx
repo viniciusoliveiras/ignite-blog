@@ -124,7 +124,7 @@ export const getStaticProps: GetStaticProps = async context => {
   };
 
   // console.log(JSON.stringify(response.data.content.heading), null, 2);
-  // console.log(response.data.content);
+  console.log(response.data.content);
 
   return {
     props: { post },
