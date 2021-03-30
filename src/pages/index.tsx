@@ -13,6 +13,7 @@ import { getPrismicClient } from '../services/prismic';
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
+import Header from '../components/Header';
 
 interface Post {
   uid?: string;
@@ -73,10 +74,12 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
         <title>home | blog</title>
       </Head>
 
+      <Header />
+
       <main className={commonStyles.container}>
         {posts.map(post => (
           <div className={styles.postContainer} key={post.uid}>
-            <Link href={`/posts/${post.uid}`}>
+            <Link href={`/post/${post.uid}`}>
               <h1>{post.data.title}</h1>
             </Link>
             <p>{post.data.subtitle}</p>

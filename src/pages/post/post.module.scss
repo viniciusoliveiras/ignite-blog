@@ -1,1 +1,43 @@
-// TODO
+.imageBanner {
+  max-width: 100vw;
+  margin: 5rem auto;
+
+  img {
+    width: 100%;
+    height: 25rem;
+    object-fit: cover;
+  }
+}
+
+.post {
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 3.6rem;
+    color: var(--heading);
+  }
+
+  .infoContent {
+    margin-top: 1.5rem;
+    margin-bottom: 4rem;
+    line-height: 1.25rem;
+
+    time,
+    span.infoAuthor {
+      margin-right: 1.5rem;
+    }
+  }
+
+  .content {
+    color: var(--body);
+    font-size: 1.125rem;
+    line-height: 1.575rem;
+    text-align: justify;
+
+    h1 {
+      font-size: 2.25rem;
+      line-height: 3.15rem;
+      font-weight: 700;
+    }
+  }
+}
