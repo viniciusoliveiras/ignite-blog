@@ -52,3 +52,31 @@
     filter: brightness(0.8);
   }
 }
+
+.leavePreview {
+  margin: 3rem auto;
+
+  width: 43.75rem;
+  height: 3.625rem;
+
+  border-radius: 0.25rem;
+
+  background: var(--heading);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    color: var(--background);
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  transition: filter 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(0.8);
+  }
+}

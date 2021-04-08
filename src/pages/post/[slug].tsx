@@ -1,3 +1,7 @@
+/* eslint-disable react/no-danger */
+/* eslint-disable no-param-reassign */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { FiCalendar, FiUser, FiClock } from 'react-icons/fi';
@@ -6,6 +10,8 @@ import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { RichText } from 'prismic-dom';
 import { useRouter } from 'next/router';
+import React from 'react';
+import Link from 'next/link';
 import Header from '../../components/Header';
 
 import { getPrismicClient } from '../../services/prismic';
@@ -32,9 +38,10 @@ interface Post {
 
 interface PostProps {
   post: Post;
+  preview: boolean;
 }
 
-export default function Post({ post }: PostProps) {
+export default function Post({ post, preview }: PostProps) {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -83,12 +90,20 @@ export default function Post({ post }: PostProps) {
             ))}
           </div>
         </article>
+
+        {preview && (
+          <aside className={styles.leavePreview}>
+            <Link href="/api/exit-preview">
+              <a>Sair do modo Preview</a>
+            </Link>
+          </aside>
+        )}
       </main>
     </>
   );
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({}) => {
   const prismic = getPrismicClient();
 
   const posts = await prismic.query([
@@ -105,10 +120,14 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async context => {
-  const { slug } = context.params;
-
+export const getStaticProps: GetStaticProps<PostProps> = async ({
+  params,
+  preview = false,
+  previewData,
+}) => {
   const prismic = getPrismicClient();
+
+  const { slug } = params;
 
   const response = await prismic.getByUID('posts', String(slug), {});
 
@@ -132,7 +151,7 @@ export const getStaticProps: GetStaticProps = async context => {
   // console.log(response.data.content);
 
   return {
-    props: { post },
+    props: { post, preview },
     revalidate: 60 * 60 * 24, // 24 horas
   };
 };

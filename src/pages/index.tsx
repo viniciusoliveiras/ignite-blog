@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { GetStaticProps } from 'next';
 import Prismic from '@prismicio/client';
 import Head from 'next/head';
@@ -32,6 +33,7 @@ interface PostPagination {
 
 interface HomeProps {
   postsPagination: PostPagination;
+  preview: boolean;
 }
 
 function mapPostIndex(post): Post {
@@ -46,7 +48,10 @@ function mapPostIndex(post): Post {
   };
 }
 
-export default function Home({ postsPagination }: HomeProps): JSX.Element {
+export default function Home({
+  postsPagination,
+  preview,
+}: HomeProps): JSX.Element {
   const [posts, setPosts] = useState<Post[]>(postsPagination.results);
   const [nextPage, setNextPage] = useState<string | null>(
     postsPagination.next_page
@@ -102,17 +107,32 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
             Carregar mais posts
           </button>
         )}
+
+        {preview && (
+          <aside className={styles.leavePreview}>
+            <Link href="/api/exit-preview">
+              <a>Sair do modo Preview</a>
+            </Link>
+          </aside>
+        )}
       </main>
     </>
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<HomeProps> = async ({
+  preview = false,
+  previewData,
+}) => {
   const prismic = getPrismicClient();
 
   const postsResponse = await prismic.query(
     [Prismic.predicates.at('document.type', 'posts')],
-    { fetch: ['post.title', 'post.subtile', 'post.author'], pageSize: 1 }
+    {
+      fetch: ['post.title', 'post.subtile', 'post.author'],
+      pageSize: 1,
+      ref: previewData?.ref ?? null,
+    }
   );
 
   // console.log(JSON.stringify(postsResponse, null, 2));
@@ -125,7 +145,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 
   return {
-    props: { postsPagination },
+    props: { postsPagination, preview },
     redirect: 60 * 30,
   };
 };
