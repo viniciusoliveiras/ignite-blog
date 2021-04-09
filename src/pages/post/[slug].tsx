@@ -120,18 +120,20 @@ export default function Post({ post, preview }: PostProps) {
           ) : null}
 
           <div className={styles.postsNavigation}>
-            {post.prev_post.uid && (
+            {post.prev_post.uid ? (
               <div className={styles.previousPost}>
                 <Link href={`/post/${post.prev_post.uid}`}>
                   <a>
                     <h1>{post.prev_post.title}</h1>
+                    <p>Post anterior</p>
                   </a>
                 </Link>
-                <p>Post anterior</p>
               </div>
+            ) : (
+              <div> </div>
             )}
 
-            {post.next_post.uid && (
+            {post.next_post.uid ? (
               <div className={styles.nextPost}>
                 <Link href={`/post/${post.next_post.uid}`}>
                   <a>
@@ -140,6 +142,8 @@ export default function Post({ post, preview }: PostProps) {
                 </Link>
                 <p>Próximo post</p>
               </div>
+            ) : (
+              <div> </div>
             )}
           </div>
 
