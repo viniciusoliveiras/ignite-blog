@@ -103,7 +103,7 @@ export default function Post({ post, preview }: PostProps) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async ({}) => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const prismic = getPrismicClient();
 
   const posts = await prismic.query([

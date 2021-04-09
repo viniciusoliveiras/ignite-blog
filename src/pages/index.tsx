@@ -70,7 +70,7 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>home | blog</title>
+        <title>spacetraveling</title>
       </Head>
 
       <Header />
@@ -130,7 +130,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({
     [Prismic.predicates.at('document.type', 'posts')],
     {
       fetch: ['post.title', 'post.subtile', 'post.author'],
-      pageSize: 1,
+      pageSize: 2,
       ref: previewData?.ref ?? null,
     }
   );
@@ -146,6 +146,6 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({
 
   return {
     props: { postsPagination, preview },
-    redirect: 60 * 30,
+    redirect: 60 * 60 * 12, // 12 hours
   };
 };
