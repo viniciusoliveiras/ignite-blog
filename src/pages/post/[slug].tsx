@@ -114,35 +114,37 @@ export default function Post({ post, preview }: PostProps) {
           </div>
         </article>
 
-        {post.next_post || post.prev_post ? (
-          <hr className={styles.dividingLine} />
-        ) : null}
+        <footer>
+          {post.next_post || post.prev_post ? (
+            <hr className={styles.dividingLine} />
+          ) : null}
 
-        <div className={styles.postsNavigation}>
-          {post.prev_post.uid && (
-            <>
-              <Link href={`/post/${post.prev_post.uid}`}>
-                <a>
-                  <h1>{post.prev_post.title}</h1>
-                </a>
-              </Link>
-              <p>Post anterior</p>
-            </>
-          )}
+          <div className={styles.postsNavigation}>
+            {post.prev_post.uid && (
+              <div className={styles.previousPost}>
+                <Link href={`/post/${post.prev_post.uid}`}>
+                  <a>
+                    <h1>{post.prev_post.title}</h1>
+                  </a>
+                </Link>
+                <p>Post anterior</p>
+              </div>
+            )}
 
-          {post.next_post.uid && (
-            <>
-              <Link href={`/post/${post.next_post.uid}`}>
-                <a>
-                  <h1>{post.next_post.title}</h1>
-                </a>
-              </Link>
-              <p>Próximo post</p>
-            </>
-          )}
-        </div>
+            {post.next_post.uid && (
+              <div className={styles.nextPost}>
+                <Link href={`/post/${post.next_post.uid}`}>
+                  <a>
+                    <h1>{post.next_post.title}</h1>
+                  </a>
+                </Link>
+                <p>Próximo post</p>
+              </div>
+            )}
+          </div>
 
-        <Comments />
+          <Comments />
+        </footer>
 
         {preview && (
           <aside className={styles.leavePreview}>

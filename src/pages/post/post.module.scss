@@ -77,6 +77,43 @@
   filter: brightness(0.5);
 }
 
+.postsNavigation {
+  display: flex;
+  align-items: space-between;
+  justify-content: space-between;
+  margin-bottom: 6.6rem;
+}
+
+.previousPost,
+.nextPost {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  transition: filter 2s;
+
+  &:hover {
+    filter: brightness(0.7);
+  }
+
+  h1 {
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.3rem;
+  }
+  p {
+    color: var(--highlight);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.nextPost {
+  text-align: right;
+}
+
 .leavePreview {
   margin: 3rem auto;
 
