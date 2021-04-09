@@ -4,14 +4,12 @@ import styles from './header.module.scss';
 
 export default function Header() {
   return (
-    <div className={styles.headerContainer}>
-      <header className={`${commonStyles.container} ${styles.header}`}>
-        <Link href="/">
-          <a>
-            <img src="/Logo.png" alt="logo" />
-          </a>
-        </Link>
-      </header>
-    </div>
+    <header className={`${commonStyles.container} ${styles.header}`}>
+      <Link href="/">
+        <a>
+          <img src="/Logo.png" alt="logo" />
+        </a>
+      </Link>
+    </header>
   );
 }
