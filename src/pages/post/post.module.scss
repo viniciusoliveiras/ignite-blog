@@ -70,6 +70,13 @@
   }
 }
 
+.dividingLine {
+  width: 1120px;
+  margin: 5rem 0;
+  background: var(--body);
+  filter: brightness(0.5);
+}
+
 .leavePreview {
   margin: 3rem auto;
 
