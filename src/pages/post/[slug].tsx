@@ -21,6 +21,7 @@ import Comments from '../../components/Comments';
 
 interface Post {
   first_publication_date: string | null;
+  last_publication_date: string | null;
   data: {
     title: string;
     banner: {
@@ -80,6 +81,19 @@ export default function Post({ post, preview }: PostProps) {
             <span className={styles.infoReadTime}>
               <FiClock /> {post.reading_time} min
             </span>
+
+            {post.last_publication_date !== post.first_publication_date && (
+              <span className={styles.infoLastEdition}>
+                *editado em{' '}
+                {format(new Date(post.last_publication_date), 'PP', {
+                  locale: ptBR,
+                })}
+                , às{' '}
+                {format(new Date(post.last_publication_date), 'H:m', {
+                  locale: ptBR,
+                })}
+              </span>
+            )}
           </div>
 
           <div className={styles.content}>
@@ -146,6 +160,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({
 
   const post = {
     first_publication_date: response.first_publication_date,
+    last_publication_date: response.last_publication_date,
     uid: response.uid,
     data: {
       title: response.data.title,
