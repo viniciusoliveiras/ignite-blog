@@ -10,7 +10,6 @@ import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { RichText } from 'prismic-dom';
 import { useRouter } from 'next/router';
-import React from 'react';
 import Link from 'next/link';
 import Header from '../../components/Header';
 
@@ -35,6 +34,7 @@ interface Post {
       }[];
     }[];
   };
+  reading_time: number;
 }
 
 interface PostProps {
@@ -78,7 +78,7 @@ export default function Post({ post, preview }: PostProps) {
             </span>
 
             <span className={styles.infoReadTime}>
-              <FiClock /> 4 min
+              <FiClock /> {post.reading_time} min
             </span>
           </div>
 
@@ -134,6 +134,16 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({
 
   const response = await prismic.getByUID('posts', String(slug), {});
 
+  const reading_time = response.data.content.reduce((acc, content) => {
+    const body = RichText.asText(content.body);
+    const split = body.split(' ');
+    const words_amount = split.length;
+
+    const result = Math.ceil(words_amount / 200);
+
+    return acc + result;
+  }, 0);
+
   const post = {
     first_publication_date: response.first_publication_date,
     uid: response.uid,
@@ -148,6 +158,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({
         return item;
       }),
     },
+    reading_time,
   };
 
   // console.log(JSON.stringify(response.data.content.heading), null, 2);
